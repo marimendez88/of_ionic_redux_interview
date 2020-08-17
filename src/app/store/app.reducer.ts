@@ -1,14 +1,10 @@
 import { ActionReducerMap } from '@ngrx/store';
-import * as reducer from './reducers';
-import { GitUsersState } from './reducers/gitUsers.reducer';
-
+import * as reducers from './reducers';
 
 export interface AppState {
-   gitUsers: reducer.GitUsersState 
+	gitUsers: reducers.GitUsersState;
 }
-
-
 
 export const appReducers: ActionReducerMap<AppState> = {
-   todos: ,
-}
+	gitUsers: reducers.gitUsersReducer,
+};

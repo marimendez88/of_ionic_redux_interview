@@ -5,7 +5,7 @@ export const uploadUsers = createAction('[GitUsers] uploadUsers');
 
 export const uploadUsersSuccess = createAction(
 	'[GitUsers] uploadUsersSuccess',
-	props<{ users: GitUsers[] }>(),
+	props<{ gitUsers: GitUsers[] }>(),
 );
 
 export const uploadUsersError = createAction(

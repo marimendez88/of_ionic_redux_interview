@@ -1,8 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import { uploadUsers, uploadUsersError, uploadUsersSuccess } from '../actions';
+import { GitUsers } from '../../models/gitUsers.model';
 
 export interface GitUsersState {
-	gitUsers: [];
+	gitUsers: GitUsers[];
 	loaded: boolean;
 	loading: boolean;
 	error: any;
@@ -19,11 +20,11 @@ const _gitUsersReducer = createReducer(
 	GitUsersInitialState,
 	on(uploadUsers, (state) => ({ ...state, loading: true })),
 
-	on(uploadUsersSuccess, (state, { users }) => ({
+	on(uploadUsersSuccess, (state, { gitUsers }) => ({
 		...state,
 		loading: false,
 		loaded: true,
-		gitUsers: [...users],
+		gitUsers: [...gitUsers],
 	})),
 
 	on(uploadUsersError, (state, { payload }) => ({

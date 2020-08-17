@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GitUsers } from '../../models/gitUsers.model';
 import { IonInfiniteScroll } from '@ionic/angular';
-import { DataService } from '../../services/data.service';
+
 import { UserDetail } from '../../models/userDetail.model';
 
 @Component({
@@ -12,36 +12,36 @@ import { UserDetail } from '../../models/userDetail.model';
 export class SearchUserComponent implements OnInit {
 	@ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-	gitusers: GitUsers[] = [];
-	uniqueUser: UserDetail[] = [];
+	// gitusers: GitUsers[] = [];
+	// uniqueUser: UserDetail[] = [];
 
-	id_user: number = 0;
-	pagination: number = 46;
+	// id_user: number = 0;
+	// pagination: number = 46;
 
-	constructor(public dataService: DataService) {}
+	constructor() {}
 
 	ngOnInit(): void {
-		this.dataService.getUsers(this.id_user).subscribe((s_gitusers) => {
-			this.gitusers = s_gitusers;
-		});
+		// this.dataService.getUsers(this.id_user).subscribe((s_gitusers) => {
+		// 	this.gitusers = s_gitusers;
+		// });
 	}
 	loadData(event) {
-		setTimeout(() => {
-			this.id_user = this.id_user + this.pagination;
-			this.dataService.getUsers(this.id_user).subscribe((s_gitusers) => {
-				this.gitusers.push(...s_gitusers);
-			});
-			event.target.complete();
-		}, 500);
+		// setTimeout(() => {
+		// 	this.id_user = this.id_user + this.pagination;
+		// 	this.dataService.getUsers(this.id_user).subscribe((s_gitusers) => {
+		// 		this.gitusers.push(...s_gitusers);
+		// 	});
+		// 	event.target.complete();
+		// }, 500);
 	}
 
 	goUser(login: string) {
-		if (!login) {
-			return;
-		}
-		this.dataService.getUniqueUser(login).subscribe((s_user) => {
-			this.uniqueUser = s_user;
-			console.log(this.uniqueUser);
-		});
+		// if (!login) {
+		// 	return;
+		// }
+		// this.dataService.getUniqueUser(login).subscribe((s_user) => {
+		// 	this.uniqueUser = s_user;
+		// 	console.log(this.uniqueUser);
+		// });
 	}
 }

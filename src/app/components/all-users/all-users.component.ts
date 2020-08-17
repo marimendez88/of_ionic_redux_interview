@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { IonList } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { GitUsers } from '../../models/gitUsers.model';
 
-import { DataService } from '../../services/data.service';
+import { Store } from '@ngrx/store';
+
+import { uploadUsers } from '../../store/actions';
+import { AppState } from '../../store/app.reducer';
+import { GitUsers } from '../../models/gitUsers.model';
 
 @Component({
 	selector: 'app-all-users',
@@ -14,24 +15,27 @@ import { DataService } from '../../services/data.service';
 })
 export class AllUsersComponent implements OnInit {
 	@ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+	gitUsers: GitUsers[] = [];
 
-	gitusers: GitUsers[] = [];
 	id_user: number = 0;
-	pagination: number = 46;
-	constructor(public dataService: DataService) {}
+	pag: number = 46;
+	constructor(private store: Store<AppState>) {}
 
 	ngOnInit(): void {
-		this.dataService.getUsers(this.id_user).subscribe((s_gitusers) => {
-			this.gitusers = s_gitusers;
-		});
+		this.store
+			.select('gitUsers')
+			.subscribe(({ gitUsers }) => (this.gitUsers = gitUsers));
+
+		this.store.dispatch(uploadUsers());
 	}
 	loadData(event) {
 		setTimeout(() => {
-			this.id_user = this.id_user + this.pagination;
-			this.dataService.getUsers(this.id_user).subscribe((s_gitusers) => {
-				this.gitusers.push(...s_gitusers);
-			});
+			this.store
+				.select('gitUsers')
+				.subscribe(({ gitUsers }) => this.gitUsers.push(...gitUsers));
 			event.target.complete();
 		}, 500);
+		this.id_user = this.id_user + this.pag;
+		this.store.dispatch(uploadUsers());
 	}
 }
