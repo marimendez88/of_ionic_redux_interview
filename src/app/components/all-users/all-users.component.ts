@@ -17,7 +17,7 @@ export class AllUsersComponent implements OnInit {
 	@ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 	gitUsers: GitUsers[] = [];
 
-	id_user: number = 0;
+	since: number = 0;
 	pag: number = 46;
 	constructor(private store: Store<AppState>) {}
 
@@ -26,16 +26,16 @@ export class AllUsersComponent implements OnInit {
 			.select('gitUsers')
 			.subscribe(({ gitUsers }) => (this.gitUsers = gitUsers));
 
-		this.store.dispatch(uploadUsers());
+		this.store.dispatch(uploadUsers({ since: this.since }));
 	}
 	loadData(event) {
+		this.since = this.since + this.pag;
 		setTimeout(() => {
 			this.store
 				.select('gitUsers')
 				.subscribe(({ gitUsers }) => this.gitUsers.push(...gitUsers));
 			event.target.complete();
 		}, 500);
-		this.id_user = this.id_user + this.pag;
-		this.store.dispatch(uploadUsers());
+		this.store.dispatch(uploadUsers({ since: this.since }));
 	}
 }

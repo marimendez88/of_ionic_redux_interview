@@ -3,6 +3,9 @@ import { GitUsers } from '../../models/gitUsers.model';
 import { IonInfiniteScroll } from '@ionic/angular';
 
 import { UserDetail } from '../../models/userDetail.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducer';
+import { uploadUserDetail } from 'src/app/store/actions';
 
 @Component({
 	selector: 'app-search-user',
@@ -18,7 +21,7 @@ export class SearchUserComponent implements OnInit {
 	// id_user: number = 0;
 	// pagination: number = 46;
 
-	constructor() {}
+	constructor(private store: Store<AppState>) {}
 
 	ngOnInit(): void {
 		// this.dataService.getUsers(this.id_user).subscribe((s_gitusers) => {
@@ -35,13 +38,8 @@ export class SearchUserComponent implements OnInit {
 		// }, 500);
 	}
 
-	goUser(login: string) {
-		// if (!login) {
-		// 	return;
-		// }
-		// this.dataService.getUniqueUser(login).subscribe((s_user) => {
-		// 	this.uniqueUser = s_user;
-		// 	console.log(this.uniqueUser);
-		// });
+	goUser(event) {
+		this.store.dispatch(uploadUserDetail(event.detail.value));
+		console.log(event.detail.value);
 	}
 }

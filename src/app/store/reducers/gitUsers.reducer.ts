@@ -18,20 +18,28 @@ export const GitUsersInitialState: GitUsersState = {
 
 const _gitUsersReducer = createReducer(
 	GitUsersInitialState,
-	on(uploadUsers, (state) => ({ ...state, loading: true })),
+	on(uploadUsers, (state, { since }) => ({
+		...state,
+		loading: true,
+		since: since,
+	})),
 
 	on(uploadUsersSuccess, (state, { gitUsers }) => ({
 		...state,
 		loading: false,
 		loaded: true,
-		gitUsers: [...gitUsers],
+		gitUsers: state.gitUsers.concat(...gitUsers),
 	})),
 
 	on(uploadUsersError, (state, { payload }) => ({
 		...state,
 		loading: false,
 		loaded: false,
-		error: payload,
+		error: {
+			url: payload.url,
+			name: payload.name,
+			message: payload.message,
+		},
 	})),
 );
 
