@@ -6,7 +6,8 @@ import { UserDetail } from '../../models/userDetail.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
 import { uploadUserDetail } from 'src/app/store/actions';
-import { uploadUsers } from '../../store/actions/gitUsers.actions';
+
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-search-user',
@@ -16,22 +17,26 @@ import { uploadUsers } from '../../store/actions/gitUsers.actions';
 export class SearchUserComponent implements OnInit {
 	@ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-	// gitusers: GitUsers[] = [];
-	// uniqueUser: UserDetail[] = [];
-
 	gitUsers: GitUsers[] = [];
 	userDetail: UserDetail = null;
-	loginname: String = '';
+	login: string;
 
 	since: number = 0;
 	pag: number = 46;
-	constructor(private store: Store<AppState>) {}
 
-	ngOnInit(): void {}
-	loadData(event) {}
+	constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+		this.login = this.route.snapshot.params.id;
+	}
+
+	ngOnInit(): void {
+		console.log(this.login);
+		this.store
+			.select('userDetail')
+			.subscribe(({ userDetail }) => (this.userDetail = userDetail));
+		this.store.dispatch(uploadUserDetail({ loginname: this.login }));
+	}
 
 	goUser(loginname) {
-		console.log(loginname);
 		this.store
 			.select('userDetail')
 			.subscribe(({ userDetail }) => (this.userDetail = userDetail));

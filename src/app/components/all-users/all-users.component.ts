@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { IonList } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -19,7 +20,8 @@ export class AllUsersComponent implements OnInit {
 
 	since: number = 0;
 	pag: number = 46;
-	constructor(private store: Store<AppState>) {}
+
+	constructor(private store: Store<AppState>, private router: Router) {}
 
 	ngOnInit(): void {
 		this.store
@@ -37,5 +39,8 @@ export class AllUsersComponent implements OnInit {
 			event.target.complete();
 		}, 300);
 		this.store.dispatch(uploadUsers({ since: this.since }));
+	}
+	clickUser(username: string) {
+		this.router.navigate([`tabs/tab2/${username}`]);
 	}
 }
