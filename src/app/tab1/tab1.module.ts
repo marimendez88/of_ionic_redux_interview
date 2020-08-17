@@ -25,7 +25,7 @@ import { EffectsArray } from '../store/effects/index';
 		EffectsModule.forRoot(EffectsArray),
 
 		StoreDevtoolsModule.instrument({
-			maxAge: 25,
+			maxAge: 10000000000,
 			logOnly: environment.production,
 		}),
 	],

@@ -1,3 +1,5 @@
 import { GitUsersEffects } from './gitUsers.effects';
 
-export const EffectsArray: any[] = [GitUsersEffects];
+import { UserDetailsEffects } from './userDetail.effects';
+
+export const EffectsArray: any[] = [GitUsersEffects, UserDetailsEffects];

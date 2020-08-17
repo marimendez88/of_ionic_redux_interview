@@ -24,10 +24,11 @@ export const UserDetaiInitialState: UserDetailState = {
 
 const _userDetailReducer = createReducer(
 	UserDetaiInitialState,
+
 	on(uploadUserDetail, (state, { loginname }) => ({
 		...state,
 		loading: true,
-		loginname,
+		loginname: loginname,
 	})),
 
 	on(uploadUserDetailSuccess, (state, { userDetail }) => ({

@@ -35,7 +35,7 @@ export class AllUsersComponent implements OnInit {
 				.select('gitUsers')
 				.subscribe(({ gitUsers }) => this.gitUsers.push(...gitUsers));
 			event.target.complete();
-		}, 500);
+		}, 300);
 		this.store.dispatch(uploadUsers({ since: this.since }));
 	}
 }

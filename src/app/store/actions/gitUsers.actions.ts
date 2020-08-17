@@ -3,7 +3,7 @@ import { GitUsers } from '../../models/gitUsers.model';
 
 export const uploadUsers = createAction(
 	'[GitUsers] uploadUsers',
-	props<{ since: number; gitUsers: GitUsers[] }>(),
+	props<{ since: number }>(),
 );
 
 export const uploadUsersSuccess = createAction(

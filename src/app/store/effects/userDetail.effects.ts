@@ -12,13 +12,12 @@ export class UserDetailsEffects {
 		this.actions$.pipe(
 			ofType(userDetailActions.uploadUserDetail),
 			mergeMap((action) =>
-				this.userService
-					.getUniqueUser(action.loginname)
-					.pipe(
-						map((userDetail) =>
-							userDetailActions.uploadUserDetailSuccess({ userDetail }),
-						),
+				this.userService.getUniqueUser(action.loginname).pipe(
+					tap((data) => console.log('tap data', data)),
+					map((userDetail) =>
+						userDetailActions.uploadUserDetailSuccess({ userDetail }),
 					),
+				),
 			),
 		),
 	);
