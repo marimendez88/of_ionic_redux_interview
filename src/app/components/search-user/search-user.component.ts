@@ -39,14 +39,14 @@ export class SearchUserComponent implements OnInit {
 		this.store
 			.select('userDetail')
 			.subscribe(({ userDetail }) => (this.userDetail = userDetail));
-		this.store.dispatch(uploadUserDetail({ loginname: this.login }));
+		this.store.dispatch(uploadUserDetail({ login: this.login }));
 	}
 
-	goUser(loginname) {
+	goUser(login) {
 		this.store
 			.select('userDetail')
 			.subscribe(({ userDetail }) => (this.userDetail = userDetail));
-		this.store.dispatch(uploadUserDetail({ loginname }));
+		this.store.dispatch(uploadUserDetail({ login }));
 	}
 	browserLink(blog) {
 		this.iab.create(blog), `_system`;

@@ -3,7 +3,7 @@ import { UserDetail } from '../../models/userDetail.model';
 
 export const uploadUserDetail = createAction(
 	'[userDetail] uploadUserDetail',
-	props<{ loginname: string }>(),
+	props<{ login: string }>(),
 );
 
 export const uploadUserDetailSuccess = createAction(

@@ -13,7 +13,7 @@ export class UserDetailsEffects {
 			ofType(userDetailActions.uploadUserDetail),
 			mergeMap((action) =>
 				this.userService
-					.getUniqueUser(action.loginname)
+					.getUniqueUser(action.login)
 					.pipe(
 						map((userDetail) =>
 							userDetailActions.uploadUserDetailSuccess({ userDetail }),

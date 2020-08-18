@@ -1,6 +1,6 @@
 export class GitUsers {
 	constructor(
-		public loginname: string,
+		public login: string,
 		public avatar: string,
 		public website: string,
 		public id: number,

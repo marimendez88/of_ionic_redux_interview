@@ -7,7 +7,7 @@ import {
 import { UserDetail } from '../../models/userDetail.model';
 
 export interface UserDetailState {
-	loginname: string;
+	login: string;
 	userDetail: UserDetail;
 	loaded: boolean;
 	loading: boolean;
@@ -15,7 +15,7 @@ export interface UserDetailState {
 }
 
 export const UserDetaiInitialState: UserDetailState = {
-	loginname: null,
+	login: null,
 	userDetail: null,
 	loaded: false,
 	loading: false,
@@ -25,10 +25,10 @@ export const UserDetaiInitialState: UserDetailState = {
 const _userDetailReducer = createReducer(
 	UserDetaiInitialState,
 
-	on(uploadUserDetail, (state, { loginname }) => ({
+	on(uploadUserDetail, (state, { login }) => ({
 		...state,
 		loading: true,
-		loginname: loginname,
+		login: login,
 	})),
 
 	on(uploadUserDetailSuccess, (state, { userDetail }) => ({

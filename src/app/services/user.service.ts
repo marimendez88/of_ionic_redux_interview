@@ -18,7 +18,7 @@ export class UserService {
 		return this.http.get<GitUsers[]>(`${this.url}/users?since=${since}`);
 	}
 
-	getUniqueUser(loginname: string) {
-		return this.http.get<UserDetail>(`${this.url}/users/${loginname}`);
+	getUniqueUser(login: string) {
+		return this.http.get<UserDetail>(`${this.url}/users/${login}`);
 	}
 }
