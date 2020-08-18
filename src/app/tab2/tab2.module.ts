@@ -14,6 +14,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { EffectsArray } from '../store/effects/index';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
 	imports: [
@@ -28,6 +29,7 @@ import { EffectsArray } from '../store/effects/index';
 			logOnly: environment.production,
 		}),
 	],
+	providers: [InAppBrowser],
 	declarations: [Tab2Page, SearchUserComponent],
 })
 export class Tab2PageModule {}

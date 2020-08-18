@@ -6,6 +6,7 @@ import { UserDetail } from '../../models/userDetail.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
 import { uploadUserDetail } from 'src/app/store/actions';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -24,11 +25,16 @@ export class SearchUserComponent implements OnInit {
 	since: number = 0;
 	pag: number = 46;
 
-	constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+	constructor(
+		private store: Store<AppState>,
+		private route: ActivatedRoute,
+		private iab: InAppBrowser,
+	) {
 		this.login = this.route.snapshot.params.id;
 	}
 
 	ngOnInit(): void {
+		this.login = this.route.snapshot.params.id;
 		console.log(this.login);
 		this.store
 			.select('userDetail')
@@ -41,5 +47,8 @@ export class SearchUserComponent implements OnInit {
 			.select('userDetail')
 			.subscribe(({ userDetail }) => (this.userDetail = userDetail));
 		this.store.dispatch(uploadUserDetail({ loginname }));
+	}
+	browserLink(blog) {
+		this.iab.create(blog), `_system`;
 	}
 }

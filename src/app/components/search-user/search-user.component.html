@@ -2,11 +2,11 @@
     <ion-searchbar #txtSearch placeholder="Type a Login-name" (ionChange)="goUser(txtSearch.value)"></ion-searchbar>
 </ion-toolbar>
 
-<ion-content *ngIf="userDetail.login !== undefined">
-    <ion-card *ngIf="userDetail.login !== undefined">
+<ion-grid *ngIf="userDetail.login !== null || userDetail.loginname !== undefined">
+    <ion-card>
         <img src="{{ userDetail.avatar_url }} " />
         <ion-card-header>
-            <ion-card-title>@{{ userDetail.login }}</ion-card-title>
+            <ion-card-title>@ {{ userDetail.login }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             Bio: {{ userDetail.bio }}
@@ -21,7 +21,7 @@
                 </ion-label>
             </ion-item>
             <ion-item>
-                <ion-label *ngIf="userDetail.blog">
+                <ion-label *ngIf="userDetail.blog" (click)="browserLink(userDetail.blog)">
                     Website: {{ userDetail.blog }}
                 </ion-label>
             </ion-item>
@@ -32,4 +32,4 @@
             </ion-item>
         </ion-card-content>
     </ion-card>
-</ion-content>
+</ion-grid>

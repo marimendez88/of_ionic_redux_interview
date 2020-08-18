@@ -19,7 +19,6 @@ export class UserService {
 	}
 
 	getUniqueUser(loginname: string) {
-		console.log(`${this.url}/users/${loginname}`);
 		return this.http.get<UserDetail>(`${this.url}/users/${loginname}`);
 	}
 }
