@@ -2,9 +2,9 @@
     <ion-searchbar #txtSearch placeholder="Type a Login-name" (ionChange)="goUser(txtSearch.value)"></ion-searchbar>
 </ion-toolbar>
 
-<ion-grid *ngIf="userDetail || userDetail !== null || userDetail !== undefined">
-    <ion-card>
-        <img src="{{ userDetail.avatar_url }} " />
+<ion-grid>
+    <ion-card *ngIf="userDetail">
+        <img *ngIf="userDetail.avatar_url" src="{{ userDetail.avatar_url }} " />
         <ion-card-header>
             <ion-card-title *ngIf="userDetail">
                 @ {{ userDetail.login }}
@@ -28,7 +28,7 @@
                 </ion-label>
             </ion-item>
             <ion-item>
-                <ion-label *ngIf="userDetail.twitter_username">
+                <ion-label *ngIf="userDetail.twitter_username" (click)="twiterLink(userDetail.twitter_username)">
                     Twiter: @{{ userDetail.twitter_username }}
                 </ion-label>
             </ion-item>

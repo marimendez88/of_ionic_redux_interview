@@ -35,7 +35,7 @@ export class SearchUserComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.login = this.route.snapshot.params.id;
-		console.log(this.login);
+
 		this.store
 			.select('userDetail')
 			.subscribe(({ userDetail }) => (this.userDetail = userDetail));
@@ -49,6 +49,9 @@ export class SearchUserComponent implements OnInit {
 		this.store.dispatch(uploadUserDetail({ login }));
 	}
 	browserLink(blog) {
-		this.iab.create(blog), `_system`;
+		this.iab.create(blog);
+	}
+	twiterLink(twitter_username) {
+		this.iab.create(`https://twitter.com/${twitter_username}`);
 	}
 }
