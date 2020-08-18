@@ -2,11 +2,13 @@
     <ion-searchbar #txtSearch placeholder="Type a Login-name" (ionChange)="goUser(txtSearch.value)"></ion-searchbar>
 </ion-toolbar>
 
-<ion-grid *ngIf="userDetail.login !== null || userDetail.login !== undefined">
+<ion-grid *ngIf="userDetail || userDetail !== null || userDetail !== undefined">
     <ion-card>
         <img src="{{ userDetail.avatar_url }} " />
         <ion-card-header>
-            <ion-card-title>@ {{ userDetail.login }}</ion-card-title>
+            <ion-card-title *ngIf="userDetail">
+                @ {{ userDetail.login }}
+            </ion-card-title>
         </ion-card-header>
         <ion-card-content>
             Bio: {{ userDetail.bio }}
